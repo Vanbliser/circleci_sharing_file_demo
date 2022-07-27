@@ -12,7 +12,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - *
+            - output.txt
   
   print_output_file:
     docker:
@@ -22,7 +22,7 @@ jobs:
           at: .
       - run: 
           name: step to print output file
-          command: ls
+          command: cat output.txt
 
 workflows:
   my_workflow:
