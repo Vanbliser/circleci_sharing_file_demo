@@ -8,13 +8,11 @@ jobs:
       - checkout
       - run: 
           name: Output hello world
-          command: |
-            touch output.txt
-            echo "hello world" > output.txt
+          command: echo "hello world" > output.txt
       - persist_to_workspace:
-          root: ..
+          root: .
           paths:
-            - .
+            - *
   
   print_output_file:
     docker:
@@ -24,8 +22,7 @@ jobs:
           at: .
       - run: 
           name: step to print output file
-          command: |
-            ls
+          command: ls
 
 workflows:
   my_workflow:
