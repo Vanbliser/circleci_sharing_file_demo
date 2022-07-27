@@ -19,13 +19,12 @@ jobs:
       - image: alpine:latest
     steps:
       - attach_workspace:
-          at: ~
+          at: .
       - run: 
           name: step to print output file
           command: |
             ls
-            ls ~
-            cat ~/output.txt
+            cat output.txt
 
 workflows:
   my_workflow:
