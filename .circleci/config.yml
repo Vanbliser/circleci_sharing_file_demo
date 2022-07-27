@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build:
+  save_hello_world_output:
     docker:
       - image: alpine:latest
     steps:
@@ -11,11 +11,24 @@ jobs:
           command: |
             touch output.txt
             echo "hello world" > output.txt
+      - persist_to_storage:
+          root: .
+          paths:
+            - output.txt
+  
+  print_output_file:
+    docker:
+      - image: alpine:latest
+    steps:
+      - attach_workspace:
+          at: .
+      - run: 
+          name: step to print output file
+          command: |
             ls
-            cat output.txt
-            pwd
 
 workflows:
   my_workflow:
     jobs:
-      - build
+      - save_hello_world_output
+      - print_output_file
