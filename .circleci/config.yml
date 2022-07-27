@@ -12,19 +12,20 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - /*
+            - output.txt
   
   print_output_file:
     docker:
       - image: alpine:latest
     steps:
       - attach_workspace:
-          at: .
+          at: ~
       - run: 
           name: step to print output file
           command: |
             ls
-            cat output.txt
+            ls ~
+            cat ~/output.txt
 
 workflows:
   my_workflow:
