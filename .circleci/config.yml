@@ -2,8 +2,13 @@ version: 2.1
 
 commands:
   print_pipeline_id:
+    parameters:
+      id:
+        type: string
+        default: << pipeline.id >>
     steps:
       - run: echo $CIRCLE_WORKFLOW_ID
+      - run: echo << parameters.id >>
 
 jobs:
   save_hello_world_output:
@@ -35,7 +40,8 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-      - print_pipeline_id
+      - print_pipeline_id:
+          id: << pipeline.id >>
 
 workflows:
   my_workflow:
