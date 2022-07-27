@@ -11,6 +11,7 @@ jobs:
           command: |
             touch output.txt
             echo "hello world" > output.txt
+            ls
             cat output.txt
             pwd
 
