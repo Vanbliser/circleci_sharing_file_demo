@@ -61,4 +61,5 @@ workflows:
           requires: 
             - save_hello_world_output
       - command_usage_demo
+      - fail
 
