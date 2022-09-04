@@ -13,7 +13,7 @@ commands:
 jobs:
   save_hello_world_output:
     docker:
-      - image: alpine:latest
+      - image: cimg/base:current
     steps:
       - checkout
       - run: 
@@ -27,7 +27,9 @@ jobs:
             - project/.circleci/ansible/output.txt
       - run: 
           name: print pwd before attach to workspace
-          command: pwd
+          command: |
+            pwd
+            ls
 
   print_output_file:
     docker:
