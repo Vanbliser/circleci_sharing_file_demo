@@ -20,24 +20,35 @@ jobs:
           name: Output hello world
           command: |
             pwd
-            echo "hello world" >> output.txt
+            echo "hello world" >> .circleci/ansible/output.txt
       - persist_to_workspace:
           root: ~/
           paths:
             - project/.circleci/ansible/output.txt
-  
+      - run: 
+          name: print pwd before attach to workspace
+          command: pwd
+
   print_output_file:
     docker:
       - image: cimg/base:current
     steps:
+      - run: 
+          name: print pwd before checkout
+          command: pwd
+      - checkout
+      - run: 
+          name: print pwd before attach to workspace
+          command: pwd
       - attach_workspace:
           at: ~/
       - run: 
-          name: print pwd
+          name: print pwd after attach
           command: pwd
       - run: 
           name: step to print output file
           command: |
+            pwd
             ls
             cd .circleci/ansible
             cat output.txt
