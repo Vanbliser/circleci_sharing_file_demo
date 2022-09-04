@@ -18,7 +18,7 @@ jobs:
       - checkout
       - run: 
           name: Output hello world
-          command: echo "hello world" > output.txt
+          command: echo "hello world" >> output.txt
       - persist_to_workspace:
           root: .
           paths:
@@ -61,5 +61,4 @@ workflows:
           requires: 
             - save_hello_world_output
       - command_usage_demo
-      - fail
 
