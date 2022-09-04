@@ -26,7 +26,7 @@ jobs:
   
   print_output_file:
     docker:
-      - image: cimg/base:latest
+      - image: cimg/base:current
     steps:
       - attach_workspace:
           at: ~/
