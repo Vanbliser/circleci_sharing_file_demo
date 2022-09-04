@@ -20,7 +20,13 @@ jobs:
           name: Output hello world
           command: |
             pwd
+            ls ~/
             echo "hello world" >> .circleci/ansible/output.txt
+      - run:
+          name: cd ~
+          command: |
+            cd ~
+            pwd
       - persist_to_workspace:
           root: ~/
           paths:
