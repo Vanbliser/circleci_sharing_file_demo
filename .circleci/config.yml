@@ -18,11 +18,13 @@ jobs:
       - checkout
       - run: 
           name: Output hello world
-          command: echo "hello world" >> output.txt
+          command: |
+            pwd
+            echo "hello world" >> output.txt
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/output.txt
+            - project/.circleci/ansible/output.txt
   
   print_output_file:
     docker:
@@ -31,9 +33,13 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: 
+          name: print pwd
+          command: pwd
+      - run: 
           name: step to print output file
           command: |
             ls
+            cd .circleci/ansible
             cat output.txt
         
   command_usage_demo:
@@ -41,7 +47,7 @@ jobs:
       - image: alpine:latest
     steps:
       - print_pipeline_id:
-          id: << pipeline.id >>
+          id: <<pipeline.id>>
 
   fail:
     docker:
