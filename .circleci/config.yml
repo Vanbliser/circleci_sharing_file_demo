@@ -20,16 +20,16 @@ jobs:
           name: Output hello world
           command: echo "hello world" >> output.txt
       - persist_to_workspace:
-          root: .
+          root: ~/
           paths:
-            - output.txt
+            - project/output.txt
   
   print_output_file:
     docker:
-      - image: alpine:latest
+      - image: cimg/base
     steps:
       - attach_workspace:
-          at: .
+          at: ~/
       - run: 
           name: step to print output file
           command: |
@@ -60,5 +60,4 @@ workflows:
       - print_output_file:
           requires: 
             - save_hello_world_output
-      - command_usage_demo
 
